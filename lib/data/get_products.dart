@@ -20,7 +20,7 @@ Future<List<Products>> getProducts() async {
             (e) => Products.fromJson(e),
           )
           .toList();
-      return result;
+     return result;
     } else {
       return [];
     }

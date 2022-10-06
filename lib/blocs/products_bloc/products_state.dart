@@ -7,13 +7,19 @@ class ProductsInitialState extends ProductsState {}
 
 class ProductsLoadedState extends ProductsState {
   int? quantity;
-  Products? product;
+  List<Products>? boughtProductsList;
   List<Products> productsList;
   List<Products> selectedProductsList;
 
   ProductsLoadedState(
       {this.quantity,
-      this.product,
+      this.boughtProductsList,
       required this.productsList,
       required this.selectedProductsList});
+}
+
+class BoughtProductsState extends ProductsState {
+  
+  List<Products> boughtProductsList;
+  BoughtProductsState({required this.boughtProductsList});
 }

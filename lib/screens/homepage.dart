@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shopping_app/blocs/products_bloc/products_bloc.dart';
+import 'package:shopping_app/blocs/shared_preferences/preferences_service.dart';
 import 'package:shopping_app/constants/colors.dart';
 import 'package:shimmer/shimmer.dart';
-import '../bloc/products_bloc.dart';
 import '../constants/texts_constants.dart';
 import '../constants/textyle_constants.dart';
-import '../data/products_model.dart';
 import '../widgets/sidebar.dart';
 import 'cart.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +37,13 @@ class HomePage extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.shopping_cart),
                         color: kDarkGrey,
-                        onPressed: () {
+                        onPressed: ()  {
+                  
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  Cart(state.selectedProductsList),
+                                  Cart(),
                             ),
                           );
                         },
@@ -189,6 +189,9 @@ class HomePage extends StatelessWidget {
                                                     productList:
                                                         state.productsList),
                                               );
+
+                                              PreferencesService().saveProducts(
+                                                  state.selectedProductsList);
                                             },
                                             style: ElevatedButton.styleFrom(
                                               elevation: 0.25,
@@ -305,11 +308,9 @@ class HomePage extends StatelessWidget {
                     },
                   ),
                 );
-                
               } else {
                 return const CircularProgressIndicator();
               }
-              
             },
           )
         ],

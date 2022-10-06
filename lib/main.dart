@@ -1,25 +1,30 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_app/blocs/cart_bloc/cart_bloc.dart';
+import 'package:shopping_app/blocs/products_bloc/products_bloc.dart';
 import 'package:shopping_app/data/get_products.dart';
 import 'package:shopping_app/data/products_model.dart';
 import 'package:shopping_app/screens/homepage.dart';
-import 'package:shopping_app/shared_pref.dart';
-
-import 'bloc/products_bloc.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // final preferencesService = PreferencesService();
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductsBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductsBloc>(
+          create: (BuildContext context) => ProductsBloc(),
+        ),
+        BlocProvider<CartBloc>(
+          create: (BuildContext context) => CartBloc(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

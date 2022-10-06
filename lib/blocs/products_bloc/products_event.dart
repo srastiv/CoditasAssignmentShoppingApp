@@ -22,3 +22,10 @@ class DecrementEvent extends ProductsEvent {
   List<Products> productList;
   DecrementEvent({required this.product, required this.productList});
 }
+
+class BuyEvent extends ProductsEvent {
+    Products product;
+  List<Products> productList;
+   List<Products> boughtProductsList;
+  BuyEvent({required this.boughtProductsList,required this.product, required this.productList});
+}

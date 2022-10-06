@@ -25,7 +25,6 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
         emit(ProductsLoadedState(
             quantity: event.product.quantity = 1,
-            product: event.product,
             productsList: event.productList,
             selectedProductsList: selectedProductsList));
       },
@@ -38,7 +37,6 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         }
         emit(ProductsLoadedState(
             quantity: event.product.quantity,
-            product: event.product,
             productsList: event.productList,
             selectedProductsList: selectedProductsList));
       },
@@ -55,9 +53,34 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         }
         emit(ProductsLoadedState(
             quantity: event.product.quantity,
-            product: event.product,
             productsList: event.productList,
             selectedProductsList: selectedProductsList));
+      },
+    );
+    on<BuyEvent>(
+      (event, emit) {
+        List<Products> boughtProductsList = [];
+        selectedProductsList.forEach((element) {
+          boughtProductsList.add(element);
+        });
+
+        boughtProductsList.forEach(
+          (element) {
+            selectedProductsList.remove(element);
+          },
+        );
+
+      //  print("length: ${boughtProductsList.length}");
+
+      //  print("selectedProductsList: ${selectedProductsList.length}");
+      
+        // emit(
+        //   ProductsLoadedState(
+        //       quantity: event.product.quantity,
+        //       productsList: event.productList,
+        //       selectedProductsList: selectedProductsList,
+        //       boughtProductsList: boughtProductsList),
+        // );
       },
     );
   }

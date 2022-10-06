@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_app/blocs/products_bloc/products_bloc.dart';
 import 'package:shopping_app/constants/texts_constants.dart';
-import '../bloc/products_bloc.dart';
+
 import '../constants/colors.dart';
 import '../constants/textyle_constants.dart';
 import '../data/products_model.dart';
